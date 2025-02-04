@@ -1,22 +1,23 @@
-"""
-Напишите программу, которая принимает 3 числа, сравнивает между собой и возвращает максимальное и минимальное числа. 
-Программа должна также корректно обрабатывать различные варианты равенств чисел. 
-Функции min и мах не использовать. Только условный оператор.
-"""
+s = input()
 
-numbers = list(map(int, input().split()))
+res = ''
+count = 0
+curr = s[0]
 
-min_max_numbers = [numbers[0], numbers[0]]
+for el in s:
+    if el == curr:
+        count += 1
+    else:
+        if count == 1:
+            res += f"{curr}"
+        else:
+            res += f"{curr}{count}"
+        curr = el
+        count = 1
 
-def get_max_min_numbers(num, min_max_numbers):
-    if num > min_max_numbers[0]:
-        min_max_numbers[0] = num
-    if num < min_max_numbers[1]:
-        min_max_numbers[1] = num
-    return
+if count == 1:
+    res += f"{curr}"
+else:
+    res += f"{curr}{count}"
 
-for num in numbers:
-    get_max_min_numbers(num, min_max_numbers)
-
-
-print(f"Максимальное число: {min_max_numbers[0]}, минимальное число: {min_max_numbers[1]}")
+print(res)

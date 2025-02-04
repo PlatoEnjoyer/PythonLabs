@@ -1,26 +1,29 @@
-from math import factorial
+d = {'1': 'один', '2': 'два', '3': 'три', '4': 'четыре', '5': 'пять', '6': 'шесть', '7': 'семь', '8': 'восемь', '9': 'девять', '10': 'десять', '11': 'одинадцать',
+     '12': 'двенадцать', '13': 'тринадцать', '14': 'четырнадцать', '15': 'пятнадцать', '16': 'шестнадцать', '17': 'семнацдцать', '18': 'восемнадцать', '19': 'девятнадцать', 
+     '20': 'двадцать', '30': 'тридцать', '40': 'сорок', '50': 'пятьдесят', '60': 'шестьдесят', '70': 'семьдесят', '80': 'восемьдесят', '90': 'девяносто', '100': 'сто',
+     '200': 'двести', '300': 'триста','400': 'четыресто', '500': 'пятьсот', '600': 'шестьсот', '700': 'семьсот', '800': 'восемьсот', '900': 'девятьсот', '1000': 'тысяча'}
 
-n = int(input())
+s = input()
 
+def parse(s):
+    if s in d.keys():
+        return d[s]
 
-def cnk(n, k):
-    return int(factorial(n)/(factorial(n - k)*factorial(k)))
+    s = int(s)
+    res = []
+    p = 1
 
-def pascal_triangle(n, lvl):
-    print(' '*(n - (lvl)), end='')
+    while s:
+        curr = (s % 10) * p
+        res.append(d[str(curr)] + " ")
+        p *= 10
+        s //= 10
     
-    for k in range(lvl//2+1):
-        print(cnk(lvl, k), end=' ')
-    for k in range(lvl//2, -1, -1):
-        if lvl % 2 == 0 and k == lvl//2:
-            continue
-        print(cnk(lvl, k), end=' ')
-    print()
+    return res
 
-    if lvl == n:
-        return
-    else:
-        pascal_triangle(n, lvl+1)
-    
-
-pascal_triangle(n, 0)
+if s in d.keys():
+    print(d[s])
+else:
+    res = parse(s)
+    for i in range(1, len(res) + 1):
+        print(res[-i], end='')
